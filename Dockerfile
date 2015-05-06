@@ -63,7 +63,8 @@ ENV MASTER_HOST localhost
 ENV MASTER_PORT 80
 ENV JENKINS_USERNAME jenkins
 ENV JENKINS_PASSWORD jenkins
-ENV JENKINS_LABELS slave robotframework phantomjs jmeter multimechanize graphwiz nodejs python selenium2 linux ubuntu
+ENV JENKINS_LABELS slave
+ENV EXECUTORS 1
 ENV SLAVE_NAME slave
 
 WORKDIR $JENKINS_HOME
