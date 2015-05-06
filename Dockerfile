@@ -70,5 +70,4 @@ WORKDIR $JENKINS_HOME
 
 
 # Start Slave
-#ENTRYPOINT exec /usr/local/bin/swarm-slave.sh
-# exec /usr/local/bin/swarm-slave.sh
+ENTRYPOINT exec /usr/local/bin/swarm-slave.sh
