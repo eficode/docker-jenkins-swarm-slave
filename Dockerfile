@@ -50,6 +50,11 @@ VOLUME /var/jenkins_home
 
 # Add swarm jar
 ADD http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/1.24/swarm-client-1.24-jar-with-dependencies.jar /usr/local/lib/swarm-slave.jar
+RUN chmod ugo+rx /usr/local/lib/swarm-slave.jar
+
+# Add startup script
+ADD swarm-slave.sh /usr/local/bin/swarm-slave.sh
+RUN chmod ugo+rx /usr/local/bin/swarm-slave.sh
 
 # Set Environment for connection
 USER jenkins
@@ -58,11 +63,12 @@ ENV MASTER_HOST localhost
 ENV MASTER_PORT 80
 ENV JENKINS_USERNAME jenkins
 ENV JENKINS_PASSWORD jenkins
-ENV JENKINS_LABELS slave
+ENV JENKINS_LABELS slave robotframework phantomjs jmeter multimechanize graphwiz nodejs python selenium2 linux ubuntu
+ENV SLAVE_NAME slave
 
-COPY swarm-slave.sh /usr/local/bin/swarm-slave.sh
 WORKDIR $JENKINS_HOME
 
 
 # Start Slave
-ENTRYPOINT exec /usr/local/bin/swarm-slave.sh
+#ENTRYPOINT exec /usr/local/bin/swarm-slave.sh
+# exec /usr/local/bin/swarm-slave.sh
