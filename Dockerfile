@@ -47,9 +47,8 @@ RUN apt-get install -y nodejs npm nodejs-legacy
 RUN apt-get clean
 
 # CREATE Jenkins User
-ENV JENKINS_HOME /var/jenkins_home
-RUN useradd -d "$JENKINS_HOME" -u 1000 -m -s /bin/bash jenkins
-VOLUME /var/jenkins_home
+RUN useradd -d "/var/jenkins_slave_home" -u 1000 -m -s /bin/bash jenkins
+VOLUME /var/jenkins_slave_home
 
 # Add swarm jar
 ADD http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/1.24/swarm-client-1.24-jar-with-dependencies.jar /usr/local/lib/swarm-slave.jar
@@ -62,15 +61,15 @@ RUN chmod ugo+rx /usr/local/bin/swarm-slave.sh
 # Set Environment for connection
 USER jenkins
 ENV LANG C.UTF-8
-ENV MASTER_HOST localhost
-ENV MASTER_PORT 80
-ENV JENKINS_USERNAME jenkins
-ENV JENKINS_PASSWORD jenkins
-ENV JENKINS_LABELS slave
-ENV EXECUTORS 1
-ENV SLAVE_NAME slave
+ENV JENKINS_MASTER_HOST localhost
+ENV JENKINS_MASTER_PORT 80
+ENV JENKINS_MASTER_USERNAME jenkins
+ENV JENKINS_MASTER_PASSWORD jenkins
+ENV JENKINS_SLAVE_LABELS slave
+ENV JENKINS_SLAVE_EXECUTORS 1
+ENV JENKINS_SLAVE_NAME slave
 
-WORKDIR $JENKINS_HOME
+WORKDIR /var/jenkins_slave_home
 
 
 # Start Slave
