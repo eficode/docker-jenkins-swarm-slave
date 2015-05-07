@@ -15,7 +15,30 @@ echo ' - Jenkins Slave Name:     ' $JENKINS_SLAVE_NAME
 echo ' - Jenkins Slave Labels:   ' $JENKINS_SLAVE_LABELS
 echo ' - Jenkins Slave Executors:' $JENKINS_SLAVE_EXECUTORS
 
-#set ARGUMENT= -name $SLAVE_NAME -master http://$JENKINS_MASTER_HOST:$JENKINS_MASTER_PORT -labels $JENKINS_SLAVE_LABELS -disableSslVerification -username $JENKINS_MASTER_USERNAME -password $JENKINS_MASTER_PASSWORD -fsroot /var/jenkins_slave_home -mode exclusive
-#echo $ARGUMENT
 
-exec java -jar /usr/local/lib/swarm-slave.jar -username $JENKINS_MASTER_USERNAME -password $JENKINS_MASTER_PASSWORD
+ARGUMENT="-jar /usr/local/lib/swarm-slave.jar -fsroot /var/jenkins_slave_home -disableSslVerification"
+
+if [ $JENKINS_MASTER_HOST != "*** Auto Discovery ***" ]; then
+  ARGUMENT="$ARGUMENT -master http://$JENKINS_MASTER_HOST:$JENKINS_MASTER_PORT"
+fi
+
+if [ $JENKINS_MASTER_USERNAME != "*** Optional ***" ]; then
+  ARGUMENT="$ARGUMENT -username $JENKINS_MASTER_USERNAME"
+fi
+
+if [ $JENKINS_MASTER_PASSWORD != "*** Optional ***" ]; then
+  ARGUMENT="$ARGUMENT -password $JENKINS_MASTER_PASSWORD"
+fi
+
+
+if [ $JENKINS_SLAVE_NAME != "*** Optional ***" ]; then
+  ARGUMENT="$ARGUMENT -name $JENKINS_SLAVE_NAME"
+fi
+
+if [ $JENKINS_SLAVE_LABELS != "*** Optional ***" ]; then
+  ARGUMENT="$ARGUMENT -mode exclusive -labels $JENKINS_SLAVE_LABELS"
+fi
+
+
+echo java $ARGUMENT
+exec java $ARGUMENT
