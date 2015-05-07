@@ -57,7 +57,7 @@ ENV JENKINS_MASTER_HOST *** Auto Discovery ***
 ENV JENKINS_MASTER_PORT 80
 ENV JENKINS_MASTER_USERNAME *** Optional ***
 ENV JENKINS_MASTER_PASSWORD *** Optional ***
-ENV JENKINS_SLAVE_LABELS 'slave robotframework pybot selenium2library phantomjs multi-mechanize graphviz jmeter nodejs linux ubuntu'
+ENV JENKINS_SLAVE_LABELS slave robotframework pybot selenium2library phantomjs multi-mechanize graphviz jmeter nodejs linux ubuntu
 ENV JENKINS_SLAVE_EXECUTORS 4
 ENV JENKINS_SLAVE_NAME *** Optional ***
 
