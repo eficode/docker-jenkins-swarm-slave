@@ -15,7 +15,7 @@ echo ' - Jenkins Slave Name:     ' $JENKINS_SLAVE_NAME
 echo ' - Jenkins Slave Labels:   ' $JENKINS_SLAVE_LABELS
 echo ' - Jenkins Slave Executors:' $JENKINS_SLAVE_EXECUTORS
 
-set ARGUMENT= -name $SLAVE_NAME -master http://$JENKINS_MASTER_HOST:$JENKINS_MASTER_PORT -labels $JENKINS_SLAVE_LABELS -disableSslVerification -username $JENKINS_MASTER_USERNAME -password $JENKINS_MASTER_PASSWORD -fsroot /var/jenkins_slave_home -mode exclusive
-echo $ARGUMENT
+#set ARGUMENT= -name $SLAVE_NAME -master http://$JENKINS_MASTER_HOST:$JENKINS_MASTER_PORT -labels $JENKINS_SLAVE_LABELS -disableSslVerification -username $JENKINS_MASTER_USERNAME -password $JENKINS_MASTER_PASSWORD -fsroot /var/jenkins_slave_home -mode exclusive
+#echo $ARGUMENT
 
-exec java -jar /usr/local/lib/swarm-slave.jar $ARGUMENT
+exec java -jar /usr/local/lib/swarm-slave.jar -username $JENKINS_MASTER_USERNAME -password $JENKINS_MASTER_PASSWORD
