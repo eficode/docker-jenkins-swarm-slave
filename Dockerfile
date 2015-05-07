@@ -19,14 +19,6 @@ RUN apt-get install -y python-pip
 RUN pip install robotframework
 RUN pip install robotframework-selenium2library
 
-# Compile and Install PhantomJS
-#RUN apt-get install -y g++ build-essential python flex bison gperf ruby perl libsqlite3-dev libfontconfig1-dev libicu-dev libfreetype6 libssl-dev libpng-dev libjpeg-dev
-#RUN git clone git://github.com/ariya/phantomjs.git
-#WORKDIR phantomjs
-#RUN git checkout 2.0
-#RUN ./build.sh --confirm
-#RUN cp bin/phantomjs /usr/bin/
-
 # Install PhantomJS
 RUN apt-get install -y phantomjs
 
@@ -65,7 +57,7 @@ ENV JENKINS_MASTER_HOST *** Auto Discovery ***
 ENV JENKINS_MASTER_PORT 80
 ENV JENKINS_MASTER_USERNAME *** Optional ***
 ENV JENKINS_MASTER_PASSWORD *** Optional ***
-ENV JENKINS_SLAVE_LABELS *** Optional ***
+ENV JENKINS_SLAVE_LABELS 'slave robotframework pybot selenium2library phantomjs multi-mechanize graphviz jmeter nodejs linux ubuntu'
 ENV JENKINS_SLAVE_EXECUTORS 4
 ENV JENKINS_SLAVE_NAME *** Optional ***
 
